@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import json
 import logging
