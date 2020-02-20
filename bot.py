@@ -27,7 +27,6 @@ def thonk(update,context):
 """)
 
 def memes(update,context):
-    print("Yeah we here yo")
     # context.bot.send_message(chat_id=update.effective_chat.id,text=update.message.text)
     if update.message.text.lower().startswith("i'm") or update.message.text.lower().startswith("im") or update.message.text.lower().startswith("i am"):
         reply_string = update.message.text.split(' ',1)[1]
@@ -36,11 +35,13 @@ def memes(update,context):
             text="Hi {0}, I'm Dad! :)".format(reply_string),
             reply_to_message_id=update.message.message_id)
     elif "?" in update.message.text:
-        context.bot.send_message(
-            chat_id=update.effective_chat.id,
-            text="🤔",
-            reply_to_message_id=update.message.message_id
-        )
+        rand = random.randint(1,20)
+        if rand == 1:
+            context.bot.send_message(
+                chat_id=update.effective_chat.id,
+                text="🤔",
+                reply_to_message_id=update.message.message_id
+            )
     elif "🤔" in update.message.text:
         context.bot.send_message(
             chat_id=update.effective_chat.id,
@@ -52,7 +53,7 @@ def memes(update,context):
             chat_id=update.effective_chat.id,
             text="\"{0}\"\n\n Epic gamer moment 😎".format(update.message.text)
         )
-    elif ("fuck" in update.message.text.lower() or "shit" in update.message.text.lower()) and ("bot" in update.message.text.lower()):
+    elif ("fuck" in update.message.text.lower() or "shit" in update.message.text.lower()) and ("bot" in update.message.text.lower() or "thonk" in update.message.text.lower()):
             context.bot.send_message(
                 chat_id=update.effective_chat.id,
                 text="Hey, fuck you too!",
@@ -61,14 +62,14 @@ def memes(update,context):
     elif update.message.text.startswith("https://"):
         send_meme_image(update,context)
     else:
-        rand = random.randint(1,20)
+        rand = random.randint(1,30)
         if rand == 1:
             context.bot.send_message(
                 chat_id=update.effective_chat.id,
                 text="\"{0}\"\n\n Things that make you go hmmmmm 🤔".format(update.message.text)
                 # reply_to_message_id=update.message.message_id
             )
-        elif rand == 1:
+        elif rand == 2:
             context.bot.send_message(
                 chat_id=update.effective_chat.id,
                 text="\"{0}\"\n\n Really makes you think doesn't it?".format(update.message.text)
