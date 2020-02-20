@@ -61,10 +61,16 @@ def memes(update,context):
                 text="Hey, fuck you too!",
                 reply_to_message_id=update.message.message_id
             ) 
+    elif ("thanks" in update.message.text.lower() and ("bot" in update.message.text.lower() or "thonk" in update.message.text.lower())):
+        context.bot.send_message(
+                chat_id=update.effective_chat.id,
+                text="You're welcome!",
+                reply_to_message_id=update.message.message_id
+            ) 
     elif update.message.text.startswith("https://"):
         send_meme_image(update,context)
     else:
-        rand = random.randint(1,30)
+        rand = random.randint(1,100)
         if rand == 1:
             context.bot.send_message(
                 chat_id=update.effective_chat.id,
