@@ -4,6 +4,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import json
 import logging
 import random
+import os
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -37,18 +38,18 @@ def memes(update,context):
             text="Hi {0}, I'm Dad! :)".format(reply_string),
             reply_to_message_id=update.message.message_id)
     elif "?" in update.message.text:
-        rand = random.randint(1,20)
+        rand = random.randint(1,100)
         if rand == 1:
             context.bot.send_message(
                 chat_id=update.effective_chat.id,
-                text="🤔",
+                text="\"{0}\"\n\n Things that make you go hmmmmm 🤔".format(update.message.text)
                 reply_to_message_id=update.message.message_id
             )
     elif "🤔" in update.message.text:
         context.bot.send_message(
             chat_id=update.effective_chat.id,
-            text="\"{0}\"\n\n Things that make you go hmmmmm 🤔".format(update.message.text)
-            # reply_to_message_id=update.message.message_id
+            text="🤔".format(update.message.text)
+            reply_to_message_id=update.message.message_id
         )
     elif "xd" in update.message.text.lower():
         context.bot.send_message(
@@ -69,32 +70,29 @@ def memes(update,context):
             ) 
     elif update.message.text.startswith("https://"):
         send_meme_image(update,context)
-    else:
-        rand = random.randint(1,100)
-        if rand == 1:
-            context.bot.send_message(
-                chat_id=update.effective_chat.id,
-                text="\"{0}\"\n\n Things that make you go hmmmmm 🤔".format(update.message.text)
-                # reply_to_message_id=update.message.message_id
-            )
-        elif rand == 2:
-            context.bot.send_message(
-                chat_id=update.effective_chat.id,
-                text="\"{0}\"\n\n Really makes you think doesn't it?".format(update.message.text)
-                # reply_to_message_id=update.message.message_id
-            )
+    # else:
+    #     rand = random.randint(1,100)
+    #     if rand == 1:
+    #         context.bot.send_message(
+    #             chat_id=update.effective_chat.id,
+    #             text="\"{0}\"\n\n Things that make you go hmmmmm 🤔".format(update.message.text)
+    #             # reply_to_message_id=update.message.message_id
+    #         )
+    #     elif rand == 2:
+    #         context.bot.send_message(
+    #             chat_id=update.effective_chat.id,
+    #             text="\"{0}\"\n\n Really makes you think doesn't it?".format(update.message.text)
+    #             # reply_to_message_id=update.message.message_id
+    #         )
 
 def send_meme_image(update,context):
-    rand = random.randint(1,5)
+    rand = random.randint(1,50)
     if rand == 1 or True:
-        randomimage = random.randint(1,2)
-        image = 'images/clean.png'
-        if randomimage == 1:
-            image= 'images/deletethis.png'
+        random_file = random.choice(os.listdir("images"))
         context.bot.send_photo(
             chat_id=update.effective_chat.id,
             reply_to_message_id=update.message.message_id,
-            photo=open(image,'rb')
+            photo=open(random_file,'rb')
         )
 
 
