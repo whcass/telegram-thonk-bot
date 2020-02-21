@@ -57,11 +57,15 @@ def memes(update,context):
             text="\"{0}\"\n\n Epic gamer moment 😎".format(update.message.text)
         )
     elif ("fuck" in update.message.text.lower() or "shit" in update.message.text.lower()) and ("bot" in update.message.text.lower() or "thonk" in update.message.text.lower()):
-            context.bot.send_message(
-                chat_id=update.effective_chat.id,
-                text="Hey, fuck you too!",
-                reply_to_message_id=update.message.message_id
-            ) 
+        with open('insults.json') as f:
+            data = json.load(f)
+        
+        insults = data['insults']
+        context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text=random.choice(insults),
+            reply_to_message_id=update.message.message_id
+        ) 
     elif ("thanks" in update.message.text.lower() and ("bot" in update.message.text.lower() or "thonk" in update.message.text.lower())):
         context.bot.send_message(
                 chat_id=update.effective_chat.id,
