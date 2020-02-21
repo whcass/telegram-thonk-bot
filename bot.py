@@ -42,13 +42,13 @@ def memes(update,context):
         if rand == 1:
             context.bot.send_message(
                 chat_id=update.effective_chat.id,
-                text="\"{0}\"\n\n Things that make you go hmmmmm 🤔".format(update.message.text)
+                text="\"{0}\"\n\n Things that make you go hmmmmm 🤔".format(update.message.text),
                 reply_to_message_id=update.message.message_id
             )
     elif "🤔" in update.message.text:
         context.bot.send_message(
             chat_id=update.effective_chat.id,
-            text="🤔".format(update.message.text)
+            text="🤔",
             reply_to_message_id=update.message.message_id
         )
     elif "xd" in update.message.text.lower():
@@ -92,7 +92,7 @@ def send_meme_image(update,context):
         context.bot.send_photo(
             chat_id=update.effective_chat.id,
             reply_to_message_id=update.message.message_id,
-            photo=open(random_file,'rb')
+            photo=open('images/'+random_file,'rb')
         )
 
 
