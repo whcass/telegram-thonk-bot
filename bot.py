@@ -87,7 +87,7 @@ def memes(update,context):
 
 def send_meme_image(update,context):
     rand = random.randint(1,50)
-    if rand == 1 or True:
+    if rand == 1:
         random_file = random.choice(os.listdir("images"))
         context.bot.send_photo(
             chat_id=update.effective_chat.id,
