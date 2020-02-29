@@ -35,7 +35,7 @@ def memes(update,context):
     possesives = ["im", "i'm", "i am"]
     # context.bot.send_message(chat_id=update.effective_chat.id,text=update.message.text)
     text = update.message.text
-    if update.effective_user == "854734710":
+    if update.effective_user.id == "854734710":
         return None
     elif text.startswith(tuple(possesives)) and len(text) < 20:
         reply_string = text
