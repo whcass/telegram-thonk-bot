@@ -31,12 +31,8 @@ def thonk(update,context):
 
 def memes(update,context):
     # context.bot.send_message(chat_id=update.effective_chat.id,text=update.message.text)
-    if update.message.text.lower().startswith("i'm") or update.message.text.lower().startswith("im") or update.message.text.lower().startswith("i am"):
-        reply_string = update.message.text.split(' ',1)[1]
-        context.bot.send_message(
-            chat_id=update.effective_chat.id,
-            text="Hi {0}, I'm Dad! :)".format(reply_string),
-            reply_to_message_id=update.message.message_id)
+    if update.effective_user == "854734710":
+        return None
     elif "?" in update.message.text:
         rand = random.randint(1,100)
         if rand == 1:
