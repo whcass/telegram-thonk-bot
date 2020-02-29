@@ -43,14 +43,14 @@ def memes(update,context):
             reply_string = re.sub(p, "", text)
         context.bot.send_message(
             chat_id=update.effective_chat.id,
-            text="Hi {0}, I'm Dad! :)".format(reply_string),
+            text = "Hi {reply_string}, I'm Dad! :)",
             reply_to_message_id=update.message.message_id)
     elif "?" in text:
         rand = random.randint(1,100)
         if rand == 1:
             context.bot.send_message(
                 chat_id=update.effective_chat.id,
-                text="\"{0}\"\n\n Things that make you go hmmmmm 🤔".format(text),
+                text="\"{text}\"\n\n Things that make you go hmmmmm 🤔",
                 reply_to_message_id=update.message.message_id
             )
     elif "🤔" in text:
@@ -62,7 +62,7 @@ def memes(update,context):
     elif "xd" in text.lower():
         context.bot.send_message(
             chat_id=update.effective_chat.id,
-            text="\"{0}\"\n\n Epic gamer moment 😎".format(text)
+            text="\"{text}\"\n\n Epic gamer moment 😎"
         )
     elif ("fuck" in text.lower() or "shit" in text.lower()) and ("bot" in text.lower() or "thonk" in text.lower()):
         with open('insults.json') as f:
