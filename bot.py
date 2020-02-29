@@ -5,6 +5,8 @@ import json
 import logging
 import random
 import os
+import re
+
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -30,33 +32,39 @@ def thonk(update,context):
 """)
 
 def memes(update,context):
+    possesives = ["im", "i'm", "i am"]
     # context.bot.send_message(chat_id=update.effective_chat.id,text=update.message.text)
-    if update.message.text.lower().startswith("i'm") or update.message.text.lower().startswith("im") or update.message.text.lower().startswith("i am"):
-        reply_string = update.message.text.split(' ',1)[1]
+    text = update.message.text
+    if update.effective_user.id == 854734710:
+        return None
+    elif text.startswith(tuple(possesives)) and len(text) < 20:
+        reply_string = text
+        for p in possesives:
+            reply_string = re.sub(p, "", text)
         context.bot.send_message(
             chat_id=update.effective_chat.id,
-            text="Hi {0}, I'm Dad! :)".format(reply_string),
+            text = "Hi {reply_string}, I'm Dad! :)",
             reply_to_message_id=update.message.message_id)
-    elif "?" in update.message.text:
+    elif "?" in text:
         rand = random.randint(1,100)
         if rand == 1:
             context.bot.send_message(
                 chat_id=update.effective_chat.id,
-                text="\"{0}\"\n\n Things that make you go hmmmmm 🤔".format(update.message.text),
+                text="\"{text}\"\n\n Things that make you go hmmmmm 🤔",
                 reply_to_message_id=update.message.message_id
             )
-    elif "🤔" in update.message.text:
+    elif "🤔" in text:
         context.bot.send_message(
             chat_id=update.effective_chat.id,
             text="🤔",
             reply_to_message_id=update.message.message_id
         )
-    elif "xd" in update.message.text.lower():
+    elif "xd" in text.lower():
         context.bot.send_message(
             chat_id=update.effective_chat.id,
-            text="\"{0}\"\n\n Epic gamer moment 😎".format(update.message.text)
+            text="\"{text}\"\n\n Epic gamer moment 😎"
         )
-    elif ("fuck" in update.message.text.lower() or "shit" in update.message.text.lower()) and ("bot" in update.message.text.lower() or "thonk" in update.message.text.lower()):
+    elif ("fuck" in text.lower() or "shit" in text.lower()) and ("bot" in text.lower() or "thonk" in text.lower()):
         with open('insults.json') as f:
             data = json.load(f)
         
@@ -66,13 +74,13 @@ def memes(update,context):
             text=random.choice(insults),
             reply_to_message_id=update.message.message_id
         ) 
-    elif ("thanks" in update.message.text.lower() and ("bot" in update.message.text.lower() or "thonk" in update.message.text.lower())):
+    elif ("thanks" in text.lower() and ("bot" in text.lower() or "thonk" in text.lower())):
         context.bot.send_message(
                 chat_id=update.effective_chat.id,
                 text="You're welcome!",
                 reply_to_message_id=update.message.message_id
             ) 
-    elif update.message.text.startswith("https://"):
+    elif text.startswith("https://"):
         send_meme_image(update,context)
     # else:
     #     rand = random.randint(1,100)
