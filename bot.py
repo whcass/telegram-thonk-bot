@@ -34,7 +34,7 @@ def thonk(update,context):
 def memes(update,context):
     possesives = ["im", "i'm", "i am"]
     # context.bot.send_message(chat_id=update.effective_chat.id,text=update.message.text)
-    text = update.message.text
+    text: str = update.message.text
     if update.effective_user.id == 854734710:
         return None
     elif text.startswith(tuple(possesives)) and len(text) < 20:
@@ -43,14 +43,14 @@ def memes(update,context):
             reply_string = re.sub(p, "", text)
         context.bot.send_message(
             chat_id=update.effective_chat.id,
-            text = "Hi {reply_string}, I'm Dad! :)",
+            text = f"Hi {reply_string}, I'm Dad! :)",
             reply_to_message_id=update.message.message_id)
     elif "?" in text:
         rand = random.randint(1,100)
         if rand == 1:
             context.bot.send_message(
                 chat_id=update.effective_chat.id,
-                text="\"{text}\"\n\n Things that make you go hmmmmm 🤔",
+                text=f"\"{text}\"\n\n Things that make you go hmmmmm 🤔",
                 reply_to_message_id=update.message.message_id
             )
     elif "🤔" in text:
@@ -62,7 +62,7 @@ def memes(update,context):
     elif "xd" in text.lower():
         context.bot.send_message(
             chat_id=update.effective_chat.id,
-            text="\"{text}\"\n\n Epic gamer moment 😎"
+            text=f"\"{text}\"\n\n Epic gamer moment 😎"
         )
     elif ("fuck" in text.lower() or "shit" in text.lower()) and ("bot" in text.lower() or "thonk" in text.lower()):
         with open('insults.json') as f:
